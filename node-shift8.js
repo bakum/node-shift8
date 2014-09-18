@@ -253,16 +253,18 @@ Shift8.prototype.login = function() {
  * Logoffs from the remote asterisk's manager interface. Will emit the 'disconnected' event on completion
  */
 Shift8.prototype.logoff = function() {
-  this.send({
-    'Action':  'logoff'
-  }, function( error, response ) {
-    if( error ) {
-      self.emit('error', "Unable to connect to remote asterisk (" + error + ")");
-    }
-    else {
-      self.emit('disconnected');
-    }
-  });
+    var self = this;
+
+    this.send({
+        'Action':  'logoff'
+    }, function( error, response ) {
+        if( error ) {
+            self.emit('error', "Unable to connect to remote asterisk (" + error + ")");
+        }
+        else {
+            self.emit('disconnected');
+        }
+    });
 };
 
 /**
